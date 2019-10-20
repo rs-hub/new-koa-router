@@ -35,4 +35,50 @@ describe('Router', async () => {
 
         server.close();
     });
+    it('shares context', async () => {
+        const app = new Koa();
+        const router1 = new Router();
+        const router2 = new Router();
+
+        router1.get("/users", (ctx, next) => {
+            ctx.state.user = {
+                username: 'rs-hub'
+            };
+            return next();
+        });
+        router1.get("/users", (ctx) => ctx.body = ctx.state.user);
+
+        app.use(router1.routes());
+        app.use(router2.routes());
+
+        const server = app.listen(3000);
+        const res = await request(server).get('/users').expect(200);
+
+        expect(res.body).to.eql({ "username": "rs-hub" });
+
+        server.close();
+    });
+
+    it('async/await', async () => {
+        const app = new Koa();
+        const router = new Router();
+
+        router.get("/async", (ctx) => {
+            return new Promise(resolve => {
+                setTimeout(function () {
+                    ctx.body = { message: 'async/await' };
+                    resolve();
+                }, 1);
+            })
+        });
+
+        app.use(router.routes());
+
+        const server = app.listen(3000);
+        const res = await request(server).get('/async').expect(200);
+
+        expect(res.body.message).eql('async/await');
+
+        server.close();
+    })
 });
