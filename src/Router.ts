@@ -2,7 +2,7 @@ import compose from "koa-compose";
 import Methods from "./Endpoints";
 
 interface IRouter {
-    routers<T>(): compose.ComposedMiddleware<T>;
+    routes<T>(): compose.ComposedMiddleware<T>;
 }
 
 export default class Router extends Methods implements IRouter {
@@ -10,7 +10,7 @@ export default class Router extends Methods implements IRouter {
         super();
     }
 
-    public routers() {
+    public routes() {
         const middleware = [];
 
         for (const route of this.stack) {

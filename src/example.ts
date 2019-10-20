@@ -18,5 +18,5 @@ router
     .get("/posts", (ctx) => ctx.body = "GET /posts")
     .post("/posts", (ctx) => ctx.body = "POST /posts");
 
-app.use(router.routers());
+app.use(router.routes());
 app.listen(3000);
