@@ -1,0 +1,42 @@
+{
+  "name": "new-koa-router",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "tslint": "tslint -c tslint.json -p tsconfig.json",
+    "tslint:fix": "tslint --fix -c tslint.json -p tsconfig.json",
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "build": "tsc"
+  },
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run tslint:fix && npm run tslint"
+    }
+  },
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "husky": "^3.0.9",
+    "mocha": "^6.2.1"
+  },
+  "nodemonConfig": {
+    "ext": "ts,tsx,yml",
+    "watch": [
+      "src/**/*",
+      "api-docs/"
+    ],
+    "exec": "node --inspect -r ts-node/register ./src/example.ts"
+  },
+  "dependencies": {
+    "@types/koa-compose": "^3.2.4",
+    "@types/mz": "0.0.32",
+    "koa-compose": "^4.1.0",
+    "mz": "^2.7.0"
+  }
+}
