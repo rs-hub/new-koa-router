@@ -9,8 +9,16 @@ import Router from "../src/index";
 const app = new Koa();
 const router = new Router();
 
+const middleware = (ctx, next) => {
+    ctx.user  = {
+        id: 1,
+        username: "rs-hub",
+    };
+    return next();
+};
+
 router
-    .get("/users", (ctx) => ctx.body = "GET /users")
+    .get("/users", middleware, (ctx) => ctx.body = ctx.user)
     .get("/posts", (ctx) => ctx.body = "GET /posts")
     .post("/users", (ctx) => ctx.body = "POST /users")
     .post("/posts", (ctx) => ctx.body = "POST /posts");

@@ -30,7 +30,7 @@ interface IRouter extends IMethod {
 export default class Router implements IRouter {
     private readonly stack: Array<{
         method: string,
-        middleware: (ctx, next) => {},
+        middleware: [(ctx, next) => {}],
         path: string,
     }>;
 
@@ -62,11 +62,15 @@ export default class Router implements IRouter {
         const middleware = [];
 
         for (const route of this.stack) {
-            middleware.push((ctx, next) => {
-                if (ctx.path === route.path && ctx.method === route.method) {
-                    route.middleware[0](ctx, next);
-                }
-                return next();
+
+            route.middleware.forEach((el) => {
+                const func = (ctx, next) => {
+                    if (ctx.path === route.path && ctx.method === route.method) {
+                        return el(ctx, next);
+                    }
+                    return next();
+                };
+                middleware.push(func);
             });
         }
         return compose(middleware);
