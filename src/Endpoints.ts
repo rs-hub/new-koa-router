@@ -1,3 +1,5 @@
+import regexp from "path-to-regexp";
+
 interface IEndpoints {
     get(
         path: string,
@@ -30,6 +32,7 @@ export default class Endpoints implements IEndpoints {
         method: string,
         middleware: [(ctx, next) => {}],
         path: string,
+        regexp: RegExp,
     }>;
 
     constructor() {
@@ -57,7 +60,7 @@ export default class Endpoints implements IEndpoints {
     }
 
     private registerEndpoint(method: string, middleware, path) {
-        this.stack.push({ method, middleware, path });
+        this.stack.push({ method, middleware, path, regexp: regexp(path) });
         return this;
     }
 }

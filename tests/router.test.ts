@@ -80,5 +80,33 @@ describe('Router', async () => {
         expect(res.body.message).eql('async/await');
 
         server.close();
+    });
+
+    it('params', async () => {
+        const app = new Koa();
+        const router = new Router();
+
+        router.get("/params/:id/:type", (ctx) => ctx.body = ctx.params);
+        router.get("/params/:lastName/:firstName/:id/:type", (ctx) => ctx.body = ctx.params);
+
+        app.use(router.routes());
+
+        const server = app.listen(3000);
+        const res1 = await request(server).get('/params/1/regular').expect(200);
+        const res2 = await request(server).get('/params/ava/MacDonald/1/regular').expect(200);
+
+        expect(res1.body).to.eql({
+            id: '1',
+            type: 'regular'
+        });
+
+        expect(res2.body).to.eql({
+            lastName: 'ava',
+            firstName: 'MacDonald',
+            id: '1',
+            type: 'regular'
+        });
+
+        server.close();
     })
 });
