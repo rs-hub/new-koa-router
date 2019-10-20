@@ -14,8 +14,8 @@ const middleware = (ctx, next) => {
 
 router
     .get("/users", middleware, (ctx) => ctx.body = ctx.user)
-    .get("/posts", (ctx) => ctx.body = "GET /posts")
     .post("/users", (ctx) => ctx.body = "POST /users")
+    .get("/posts", (ctx) => ctx.body = "GET /posts")
     .post("/posts", (ctx) => ctx.body = "POST /posts");
 
 app.use(router.routers());

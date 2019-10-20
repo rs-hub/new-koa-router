@@ -1,7 +1,7 @@
 import compose from "koa-compose";
-import Methods from './Endpoints';
+import Methods from "./Endpoints";
 
-interface IRouter  {
+interface IRouter {
     routers<T>(): compose.ComposedMiddleware<T>;
 }
 
@@ -15,13 +15,12 @@ export default class Router extends Methods implements IRouter {
 
         for (const route of this.stack) {
             route.middleware.forEach((el) => {
-                const func = (ctx, next) => {
+                middleware.push((ctx, next) => {
                     if (ctx.path === route.path && ctx.method === route.method) {
                         return el(ctx, next);
                     }
                     return next();
-                };
-                middleware.push(func);
+                });
             });
         }
         return compose(middleware);
