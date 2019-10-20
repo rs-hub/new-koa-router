@@ -19,6 +19,7 @@ const middleware = (ctx, next) => {
 
 router
     .get("/users", middleware, (ctx) => ctx.body = ctx.user)
+    .get("/users/:type/:id", (ctx) => ctx.body = ctx.params)
     .get("/posts", (ctx) => ctx.body = "GET /posts")
     .post("/users", (ctx) => ctx.body = "POST /users")
     .post("/posts", (ctx) => ctx.body = "POST /posts");
