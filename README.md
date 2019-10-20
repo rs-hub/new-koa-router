@@ -23,6 +23,6 @@ router
     .post("/users", (ctx) => ctx.body = "POST /users")
     .post("/posts", (ctx) => ctx.body = "POST /posts");
 
-app.use(router.routers());
+app.use(router.routes());
 app.listen(3000);
 ```
