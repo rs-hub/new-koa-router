@@ -1,0 +1,28 @@
+# Dependency directory
+node_modules
+bower_components
+
+# Editors
+.idea
+*.iml
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Logging files
+*.log
+
+error.log
+yarn-error.log
+uploads
+src/example.ts
+
+.gitignore
+data
+src
+tslint.json
+tsconfig.json
+.env
+docker-compose.yml
+tests

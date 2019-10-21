@@ -34,9 +34,11 @@ export default class Endpoints implements IEndpoints {
         path: string,
         regexp: RegExp,
     }>;
+    public middleware: any[];
 
     constructor() {
         this.stack = [];
+        this.middleware = [];
     }
 
     public get(path: string, ...middleware): Endpoints {
@@ -62,5 +64,10 @@ export default class Endpoints implements IEndpoints {
     private registerEndpoint(method: string, middleware, path) {
         this.stack.push({ method, middleware, path, regexp: regexp(path) });
         return this;
+    }
+
+    public use(middleware) {
+       this.middleware.push(middleware);
+        return this
     }
 }

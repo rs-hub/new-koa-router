@@ -11,11 +11,9 @@ export default class Router extends Methods implements IRouter {
     }
 
     public routes() {
-        const middleware = [];
-
         for (const route of this.stack) {
             route.middleware.forEach((el) => {
-                middleware.push((ctx, next) => {
+                this.middleware.push((ctx, next) => {
                     if (route.regexp.test(ctx.path) && ctx.method === route.method) {
                         ctx.params = this.buildParams(decodeURIComponent(ctx.path), route.regexp, route.path);
                         return el(ctx, next);
@@ -24,7 +22,7 @@ export default class Router extends Methods implements IRouter {
                 });
             });
         }
-        return compose(middleware);
+        return compose(this.middleware);
     }
 
     private buildParams(url, regexp, path) {
