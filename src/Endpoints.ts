@@ -67,7 +67,7 @@ export default class Endpoints implements IEndpoints {
     }
 
     public use(middleware) {
-       this.middleware.push(middleware);
+        this.middleware.push(middleware);
         return this
     }
 }
