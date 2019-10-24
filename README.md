@@ -49,7 +49,6 @@ import * as bluebird from 'bluebird';
 
 const app = new Koa();
 const routerPrivate = new Router();
-const routerPublic = new Router();
 
 routerPrivate.use(koaJwt({ secret: 'key' }));
 routerPrivate
@@ -57,15 +56,7 @@ routerPrivate
         ctx.body = ctx.state.user;
     });
 
-const jwtSign = bluebird.promisify(jwt.sign);
-routerPublic
-    .post('/jwt', async (ctx) => {
-        const token = await jwtSign({ id: 1, username: 'rs-hub' }, 'key');
-        ctx.body = { token };
-    });
-
 app.use(routerPrivate.routes());
-app.use(routerPublic.routes());
 app.listen(3000);
 ```
 
