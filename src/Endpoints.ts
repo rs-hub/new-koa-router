@@ -61,6 +61,17 @@ export default class Endpoints implements IEndpoints {
         return this.registerEndpoint("PUT", middleware, path);
     }
 
+    public all(path: string, ...middleware): Endpoints {
+        return this.registerEndpoint("ALL", middleware, path);
+    }
+
+    public redirect(path: string, toPath: string): Endpoints {
+        return this.registerEndpoint("ALL", [(ctx) => {
+            ctx.status = 301;
+            ctx.redirect(toPath);
+        }], path);
+    }
+
     private registerEndpoint(method: string, middleware, path) {
         this.stack.push({ method, middleware, path, regexp: regexp(path) });
         return this;

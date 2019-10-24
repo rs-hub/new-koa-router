@@ -14,7 +14,7 @@ export default class Router extends Methods implements IRouter {
         for (const route of this.stack) {
             route.middleware.forEach((el) => {
                 this.middleware.push((ctx, next) => {
-                    if (ctx.method === route.method && route.regexp.test(ctx.path)) {
+                    if ((ctx.method === route.method || route.method === 'ALL') && route.regexp.test(ctx.path)) {
                         ctx.params = this.buildParams(decodeURIComponent(ctx.path), route.regexp, route.path);
                         return el(ctx, next);
                     }

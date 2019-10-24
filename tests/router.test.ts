@@ -108,5 +108,71 @@ describe('Router', async () => {
         });
 
         server.close();
-    })
+    });
+
+    it('method all', async () => {
+        const app = new Koa();
+        const router = new Router();
+
+        router.all("/all", (ctx) => ctx.body = {
+            msg: 'all'
+        });
+
+        app.use(router.routes());
+
+        const server = app.listen(3000);
+        const res1 = await request(server).get('/all').expect(200);
+        const res2 = await request(server).post('/all').expect(200);
+        const res3 = await request(server).put('/all').expect(200);
+
+        expect(res1.body).to.eql({ msg: 'all' });
+        expect(res2.body).to.eql({ msg: 'all' });
+        expect(res3.body).to.eql({ msg: 'all' });
+
+        server.close();
+    });
+});
+
+describe('Router redirect', () => {
+    it('registers redirect', (done) => {
+        const app = new Koa();
+        const router = new Router();
+
+        expect(router.redirect).to.be.an('function');
+        router.redirect('/1', '/users');
+        router.redirect('/2', '/users');
+
+        app.use(router.routes());
+
+        expect(router.stack).to.length(2);
+        expect(router.stack[0]).to.haveOwnProperty('path', '/1');
+        expect(router.stack[1]).to.haveOwnProperty('path', '/2');
+
+        done();
+    });
+
+    it('redirects using', async () => {
+        const app = new Koa();
+        const router = new Router();
+
+        router.redirect('/1', '/users');
+
+        router.get("/2", (ctx) => {
+            ctx.status = 301;
+            ctx.redirect('/users');
+        });
+
+        router.get("/users", () => {});
+
+        app.use(router.routes());
+
+        const server = app.listen(3000);
+        const res1 = await request(server).get('/1').expect(301);
+        const res2 = await request(server).get('/2').expect(301);
+
+        expect(res1.header).to.haveOwnProperty('location', '/users');
+        expect(res2.header).to.haveOwnProperty('location', '/users');
+
+        server.close();
+    });
 });

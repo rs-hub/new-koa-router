@@ -65,3 +65,14 @@ app.use(routerPrivate.routes());
 app.use(routerPublic.routes());
 app.listen(3000);
 ```
+
+***Redirect***  
+```typescript
+router.redirect('/source', '/destination');
+```
+```typescript
+router.get("/source", (ctx) => {
+    ctx.status = 301;
+    ctx.redirect('/destination');
+});
+```
