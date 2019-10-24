@@ -1,6 +1,9 @@
 # new-koa-router
 Router for Koa.js
 
+[![NPM version](https://img.shields.io/npm/v/new-koa-router.svg?style=flat)](https://npmjs.org/package/new-koa-router)
+[![NPM Downloads](https://img.shields.io/npm/dm/new-koa-router.svg?style=flat)](https://npmjs.org/package/new-koa-router)
+
 **Example**  
 ```typescript
 import Koa from "koa";
