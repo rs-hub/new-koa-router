@@ -70,6 +70,7 @@ app.listen(3000);
 ```typescript
 router.redirect('/source', '/destination');
 ```
+or
 ```typescript
 router.get("/source", (ctx) => {
     ctx.status = 301;
