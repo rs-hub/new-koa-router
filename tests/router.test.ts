@@ -134,8 +134,9 @@ describe('Router', async () => {
 
     it('prefix', async () => {
         const app = new Koa();
-        const router = new Router({ prefix: 'users'});
+        const router = new Router({ prefix: '/users'});
 
+        router.get("/", (ctx) => ctx.body = {});
         router.get("/:id/:type", (ctx) => ctx.body = ctx.params);
         router.get("/:lastName/:firstName/:id/:type", (ctx) => ctx.body = ctx.params);
 
@@ -144,6 +145,7 @@ describe('Router', async () => {
         const server = app.listen();
         const res1 = await request(server).get('/users/1/regular').expect(200);
         const res2 = await request(server).get('/users/ava/MacDonald/1/regular').expect(200);
+         await request(server).get('/users').expect(200);
 
         expect(res1.body).to.eql({
             id: '1',

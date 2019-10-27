@@ -1,6 +1,6 @@
 {
   "name": "new-koa-router",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Koa router",
   "scripts": {
     "tslint": "tslint -c tslint.json -p tsconfig.json",

@@ -74,7 +74,7 @@ router.get("/source", (ctx) => {
 
 ***Prefix***  
 ```typescript
-const router = new Router({ prefix: "users" });
+const router = new Router({ prefix: "/users" });
 
 router.get("/", (ctx) => {});
 router.post("/:id", (ctx) => {});

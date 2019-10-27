@@ -80,7 +80,7 @@ export default class Endpoints implements IEndpoints {
 
     private registerEndpoint(method: string, middleware, path) {
         if (this.prefix) {
-            const prefix = `/${this.prefix}`;
+            const prefix = this.prefix;
             path = path !== "/" ? prefix + path : prefix;
         }
         this.stack.push({ method, middleware, path, regexp: regexp(path) });
