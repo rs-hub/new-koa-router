@@ -1,10 +1,31 @@
 # new-koa-router
-Router for Koa.js
+Router for [Koa.js](https://github.com/koajs/koa)
 
 [![NPM version](https://img.shields.io/npm/v/new-koa-router.svg?style=flat)](https://npmjs.org/package/new-koa-router)
 [![NPM Downloads](https://img.shields.io/npm/dm/new-koa-router.svg?style=flat)](https://npmjs.org/package/new-koa-router)
 
-**Example**  
+## Installation
+
+Install using [npm](https://www.npmjs.org/):
+```sh
+npm install new-koa-router
+```
+
+## Contributing
+
+Please submit all issues and pull requests to the [koajs/router](http://github.com/koajs/router) repository!
+
+## Tests
+
+Run tests using `npm test`
+
+## Support
+
+If you have any problem or suggestion please open an issue [here](https://github.com/rs-hub/new-koa-router/issues).
+
+## Example
+
+**Simple**  
 ```typescript
 import Koa from "koa";
 import Router from "new-koa-router";
