@@ -22,7 +22,7 @@ app.use(router.routes());
 app.listen(3000);
 ```
 
-**middleware**  
+**Middleware**  
 ```typescript
 const Middleware = (ctx, next) => {
     ctx.user  = {
@@ -39,7 +39,7 @@ router
     .post("/users", (ctx) => ctx.body = "POST /users")
     .post("/posts", (ctx) => ctx.body = "POST /posts");
 ```
-***use***  
+***Use***  
 ```typescript
 import Koa from "koa";
 import Router from "new-koa-router";
@@ -70,4 +70,12 @@ router.get("/source", (ctx) => {
     ctx.status = 301;
     ctx.redirect('/destination');
 });
+```
+
+***Prefix***  
+```typescript
+const router = new Router({ prefix: "users" });
+
+router.get("/", (ctx) => {});
+router.post("/:id", (ctx) => {});
 ```

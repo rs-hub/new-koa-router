@@ -28,6 +28,7 @@ interface IEndpoints {
 }
 
 export default class Endpoints implements IEndpoints {
+    public prefix: string | undefined;
     public readonly stack: Array<{
         method: string,
         middleware: [(ctx, next) => {}],
@@ -72,13 +73,17 @@ export default class Endpoints implements IEndpoints {
         }], path);
     }
 
-    private registerEndpoint(method: string, middleware, path) {
-        this.stack.push({ method, middleware, path, regexp: regexp(path) });
+    public use(middleware) {
+        this.middleware.push(middleware);
         return this;
     }
 
-    public use(middleware) {
-        this.middleware.push(middleware);
-        return this
+    private registerEndpoint(method: string, middleware, path) {
+        if (this.prefix) {
+            const prefix = `/${this.prefix}`;
+            path = path !== "/" ? prefix + path : prefix;
+        }
+        this.stack.push({ method, middleware, path, regexp: regexp(path) });
+        return this;
     }
 }

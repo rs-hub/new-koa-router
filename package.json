@@ -1,6 +1,6 @@
 {
   "name": "new-koa-router",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "Koa router",
   "scripts": {
     "tslint": "tslint -c tslint.json -p tsconfig.json",
@@ -47,5 +47,11 @@
     "@types/mz": "0.0.32",
     "@types/path-to-regexp": "^1.7.0",
     "supertest": "^4.0.2"
-  }
+  },
+  "keywords": [
+    "koa",
+    "middleware",
+    "router",
+    "route"
+  ]
 }
