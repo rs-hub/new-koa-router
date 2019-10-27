@@ -13,7 +13,7 @@ npm install new-koa-router
 
 ## Contributing
 
-Please submit all issues and pull requests to the [koajs/router](http://github.com/koajs/router) repository!
+Please submit all issues and pull requests to the [new-koa-router](http://github.com/new-koa-router) repository!
 
 ## Tests
 
